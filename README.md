@@ -44,7 +44,9 @@ Please read the instructions and FAQ below before begin.
 At the very beginning please fork or clone this repository into your own private repository (github / bitbucket).
 During all development please make regular commits while working on this app.
 
-Start both server and frontend project by using `npm start` command. The port for frontend is `localhost:3000`, and for
+Go to the front end directory and run `npm install`. Then, go to the server directory and run the same  `npm install`.
+
+Start both server and frontend project by using `npm start` command at the root directory. The port for frontend is `localhost:3000`, and for
 server is `localhost:8000`
 
 ### What libraries/frameworks, packages, tools can I use?
