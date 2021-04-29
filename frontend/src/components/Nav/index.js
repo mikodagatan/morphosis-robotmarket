@@ -12,8 +12,7 @@ import {
   homePath, 
 } from '../../Routes';
 
-// styles
-
+// Styles
 import { useStyles, navIconStyle } from './styles';
 
 export const drawerWidth = 250; //export to use by MainLayout and styles
