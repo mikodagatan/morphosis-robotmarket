@@ -1,10 +1,12 @@
 import {
+  Card,
   CardActionArea,
   CardActions,
   CardContent,
   CardMedia
 } from '@material-ui/core';
 import {
+  Box,
   Button,
   Typography
 } from '@material-ui/core';
@@ -12,14 +14,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 210,
+    width: 210,
+    borderRadius: 8,
+    margin: '0 10px 10px 0'
   },
   media: {
-    height: 140
+    height: 120,
+    backgroundPosition: 'bottom',
+    backgroundSize: 'auto'
   }
 })
 
-export default function ProductItem(props) {
+export default function Product(props) {
   const classes = useStyles();
 
   return (
@@ -31,9 +38,12 @@ export default function ProductItem(props) {
           title={props.product.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h2">
-            {props.product.name}
-          </Typography>
+          <Box height={70}>
+            <Typography gutterBottom variant="h3">
+              {props.product.name}
+            </Typography>
+          </Box>
+          
           <Typography variant="body2">
             Price: {props.product.price}
           </Typography>
