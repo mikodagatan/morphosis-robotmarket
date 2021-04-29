@@ -1,72 +1,22 @@
 import { useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box, Drawer, Typography } from '@material-ui/core';
 
 // Icons
-import Logo from '../assets/icons/logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import Logo from '../../assets/icons/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 
 import { 
   homePath, 
-} from '../Routes';
+} from '../../Routes';
 
-// TODO: Find way to make this responsive.
-// There are packages that allow us to determine the element
-// dimensions.
+// styles
 
-export const drawerWidth = 250;
+import { useStyles, navIconStyle } from './styles';
 
-const useStyles = makeStyles(() => ({
-  rootDiv: {
-    flexGrow: 1,
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    height: '100%',
-    zIndex: '10',
-  },
-  root: {},
-  indicator: {
-    left: '0',
-    width: '4px',
-    borderRadius: '0 5px 5px 0',
-  },
-  wrapper: {
-    flexDirection: 'row',
-    justifyContent: 'left',
-    alignItems: 'center',
-    padding: '5px 20px 5px 15px',
-    width: drawerWidth,
-  },
-  labelIcon: {
-    textTransform: 'unset',
-    minHeight: 'auto',
-  },
-  selected: {
-    fontWeight: 'bold',
-  },
-  // drawer
-  drawer: {
-    border: '0',
-  },
-  drawerPaper: {
-    border: '0',
-    width: drawerWidth,
-  },
-}));
-
-// cannot include in makeStyles for React SVG Components
-const navIconStyle = {
-  standard: {
-    margin: '0 20px 0 0',
-  },
-};
+export const drawerWidth = 250; //export to use by MainLayout and styles
 
 export default function Nav() {
   const classes = useStyles();
@@ -82,7 +32,7 @@ export default function Nav() {
     [
       'Home',
       homePath,
-      <FontAwesomeIcon icon={faCoffee} style={navIconStyle.standard}/>
+      <FontAwesomeIcon icon={faHome} style={navIconStyle.standard}/>
     ],
 
   ];
