@@ -1,4 +1,5 @@
-import { Typography, Box } from '@material-ui/core';
+import { useContext } from 'react';
+import { Box } from '@material-ui/core';
 import { useQuery } from 'react-query';
 import Product from '../components/Product';
 
@@ -9,12 +10,15 @@ const fetchProducts = async () => {
 }
 
 export default function Home() {
-  const { data, status, error } = useQuery('products', fetchProducts);
+  const { data, status, error } = useQuery(
+    'products', 
+    fetchProducts,
+    { staleTime: Infinity }
+  );
   if (status == 'loading') return 'Loading...';
   if (status == 'error') return error.message;
   return (
     <Box>
-      {status}
       { status === 'loading' && (
         <div>Loading data...</div>
       )}
@@ -25,10 +29,10 @@ export default function Home() {
       {
         status === 'success' && (
         <Box display='flex' width='100%' flexWrap='wrap'>
-          { data.data.map( product => 
-            <Product product={product}/>
+          { data.data.map( (product, index) => 
+            <Product product={product} key={index}/>
           )}
-        </Box>  
+        </Box>
       )}
       
     </Box>

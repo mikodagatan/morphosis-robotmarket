@@ -41,11 +41,3 @@ export const useStyles = makeStyles(() => ({
     width: drawerWidth,
   },
 }));
-
-// INFO: Cannot include to makeStyles.
-export const navIconStyle = {
-  standard: {
-    margin: '0 20px 0 0',
-    fontSize: '1.5rem'
-  },
-};

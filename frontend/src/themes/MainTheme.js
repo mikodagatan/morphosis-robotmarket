@@ -28,6 +28,14 @@ export default createMuiTheme({
       fontSize: '22px',
       fontWeight: '700',
     },
+    h4: {
+      padding: '0',
+      fontSize: '18px',
+      fontWeight: '700',
+    },
+    caption: {
+      color: "rgba(0,0,0,0.65)"
+    }
   },
 
   // Use rgba. Figma can change colors to rgba.

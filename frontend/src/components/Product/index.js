@@ -1,6 +1,7 @@
+import { useContext } from 'react';
+import moment from 'moment';
 import {
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia
@@ -10,54 +11,86 @@ import {
   Button,
   Typography
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import Currency from '../Currency';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 210,
-    width: 210,
-    borderRadius: 8,
-    margin: '0 10px 10px 0'
-  },
-  media: {
-    height: 120,
-    backgroundPosition: 'bottom',
-    backgroundSize: 'auto'
-  }
-})
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { iconStyle } from '../shared/styles';
+import { useStyles } from './styles';
+
+import { CartContext } from '../../contexts/CartContext';
 
 export default function Product(props) {
   const classes = useStyles();
+  const [state, dispatch] = useContext(CartContext);
+
+  const handleAddProduct = (product) => {
+    dispatch({
+      type: 'ADD_PRODUCT',
+      payload: product
+    })
+    console.log(state)
+  }
+  
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia 
-          className={classes.media}
-          image={props.product.image}
-          title={props.product.name}
-        />
-        <CardContent>
-          <Box height={70}>
-            <Typography gutterBottom variant="h3">
-              {props.product.name}
-            </Typography>
-          </Box>
+    <Card 
+      className={classes.root}
+      variant="outlined"
+      key={props.product.name}
+    >
+      <CardMedia 
+        className={classes.media}
+        image={props.product.image}
+        title={props.product.name}
+      />
+      <CardContent>
+        <Box
+          height={50}
+          textAlign="center">
+          <Typography 
+            gutterBottom 
+            variant="h4"
+          >
+            {props.product.name}
+          </Typography>
+        </Box>
+        <Box textAlign="center"> 
+          <Typography variant="button">
+            {props.product.material}
+          </Typography>
+          <Typography variant="subtitle1" >
+            <Currency value={props.product.price}/>
+          </Typography>
+          <Typography variant="caption">
+            {props.product.stock} on stock
+          </Typography>
+        </Box>
+        <Box textAlign="center">
           
-          <Typography variant="body2">
-            Price: {props.product.price}
-          </Typography>
-          <Typography variant="body2">
-            Stock: {props.product.stock}
-          </Typography>
-          <Typography variant="body2">
-            Material: {props.product.material}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+        </Box>
+      </CardContent>
       <CardActions>
-        <Button size="small" color="primary">Add to cart</Button>
+        <Button 
+          variant="outlined" 
+          color="primary" 
+          disableElevation
+          className={classes.button}
+          disabled={props.product.stock == 0}
+          onClick={() => handleAddProduct(props.product)}
+        >
+          <FontAwesomeIcon 
+            icon={faCartPlus}
+            style={iconStyle.productCard}
+            />
+          Add to cart
+        </Button>
       </CardActions>
+      <Box textAlign="right" pb={1} pr={1}>
+        <Typography variant="caption">
+          created {moment(props.product.createdAt).format('DD-MM-YYYY')}
+        </Typography>
+      </Box>
     </Card>
   )
 }
