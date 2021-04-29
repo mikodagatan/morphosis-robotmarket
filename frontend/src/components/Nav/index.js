@@ -13,8 +13,7 @@ import {
 } from '../../Routes';
 
 // Styles
-import { useStyles } from './styles';
-import { iconStyle } from '../shared/styles';
+import { useStyles, iconStyle } from './styles';
 
 export const drawerWidth = 250; //export to use by MainLayout and styles
 
@@ -32,7 +31,7 @@ export default function Nav() {
     [
       'Home',
       homePath,
-      <FontAwesomeIcon icon={faHome} style={iconStyle.menu}/>
+      <FontAwesomeIcon icon={faHome} style={iconStyle}/>
     ],
 
   ];

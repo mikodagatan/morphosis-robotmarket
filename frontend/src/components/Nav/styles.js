@@ -41,3 +41,8 @@ export const useStyles = makeStyles(() => ({
     width: drawerWidth,
   },
 }));
+
+export const iconStyle = {
+  margin: '0 20px 0 0',
+  fontSize: '1.5rem'
+}

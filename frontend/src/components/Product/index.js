@@ -15,8 +15,7 @@ import Currency from '../Currency';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { iconStyle } from '../shared/styles';
-import { useStyles } from './styles';
+import { useStyles, iconStyle } from './styles';
 
 import { CartContext } from '../../contexts/CartContext';
 
@@ -29,7 +28,6 @@ export default function Product(props) {
       type: 'ADD_PRODUCT',
       payload: product
     })
-    console.log(state)
   }
   
 

@@ -16,3 +16,8 @@ export const useStyles = makeStyles({
     width: '100%' 
   }
 })
+
+export const iconStyle = {
+  margin: '0 10px 0 0',
+  fontSize: '1.1rem'
+}
