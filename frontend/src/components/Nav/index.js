@@ -56,7 +56,7 @@ export default function Nav() {
           </Link>
           <Box p={3} display="flex" justifyContent="center">
             <Typography variant="h3" align="center">
-              Robot Market
+              Robotist
             </Typography>
           </Box>
         </Box>
