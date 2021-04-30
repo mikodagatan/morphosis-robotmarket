@@ -7,6 +7,7 @@ export const global = {
     success: '123,199,0',
     warning: '255,199,0',
     danger: '255,65,67',
+    dark: '30,30,30'
   },
 };
 

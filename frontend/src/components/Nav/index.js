@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box, Drawer, Typography } from '@material-ui/core';
 
@@ -20,7 +20,6 @@ export const drawerWidth = 250; //export to use by MainLayout and styles
 export default function Nav() {
   const classes = useStyles();
 
-  const navElement = useRef(null);
   const [value, setValue] = useState(0);
 
   const handleChange = (_event, newValue) => {
