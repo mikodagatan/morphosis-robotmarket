@@ -21,7 +21,7 @@ import { AppContext } from '../../contexts/AppContext';
 
 export default function Product(props) {
   const classes = useStyles();
-  const [state, dispatch] = useContext(AppContext);
+  const [_state, dispatch] = useContext(AppContext);
 
   const handleAddProduct = (product) => {
     dispatch({
@@ -30,6 +30,14 @@ export default function Product(props) {
     })
   }
 
+  const handleRemoveProduct = (product) => {
+    dispatch({
+      type: 'cart/removeProduct',
+      payload: product
+    })
+  }
+  
+  
   return (
     <Card 
       className={classes.root}
@@ -76,7 +84,7 @@ export default function Product(props) {
             color="primary" 
             disableElevation
             className={classes.button}
-            onClick={() => handleAddProduct(props.product)}
+            onClick={() => handleRemoveProduct(props.product)}
           >
             <FontAwesomeIcon 
               icon={faCartPlus}

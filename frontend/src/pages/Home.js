@@ -1,22 +1,29 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { Box } from '@material-ui/core';
 import Product from '../components/Product';
+import { useQuery } from 'react-query';
 
 import { AppContext } from '../contexts/AppContext';
 
+const fetchProducts = async () => {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/robots`)
+  return res.json()
+} 
+
 export default function Home() {
   const [state, dispatch] = useContext(AppContext);
-  
-  useEffect(async () => {
-    fetch(`${process.env.REACT_APP_API_URL}/robots`)
-      .then( response => response.json())
-      .then( data => {
-        dispatch({
-          type: 'list/getProducts',
-          payload: data.data
-        })
-      });
-  }, [])
+
+  const { data, status } = useQuery(
+    'products', 
+    fetchProducts, 
+    { staleTime: Infinity });
+
+  if (status == 'success' && state.productsInList.length == 0) {
+    dispatch({
+      type: 'list/getProducts',
+      payload: data.data
+    })
+  }
 
   return (
     <Box>
@@ -25,7 +32,9 @@ export default function Home() {
         width='100%' 
         flexWrap='wrap'
       >
-        { state.productsInList.map( (product, index) => 
+        { status == 'loading' && 'loading ...' }
+        { status == 'success' &&
+          state.productsInList.map( (product, index) => 
           <Product product={product} key={index} />
         )}
       </Box>
