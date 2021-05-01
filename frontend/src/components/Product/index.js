@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import moment from 'moment';
 import {
   Card,
@@ -17,19 +17,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { useStyles, iconStyle } from './styles';
 
-import { CartContext } from '../../contexts/CartContext';
+import { AppContext } from '../../contexts/AppContext';
 
 export default function Product(props) {
   const classes = useStyles();
-  const [state, dispatch] = useContext(CartContext);
+  const [state, dispatch] = useContext(AppContext);
 
   const handleAddProduct = (product) => {
     dispatch({
-      type: 'ADD_PRODUCT',
+      type: 'cart/addProduct',
       payload: product
     })
   }
-  
 
   return (
     <Card 
@@ -61,7 +60,8 @@ export default function Product(props) {
             <Currency value={props.product.price}/>
           </Typography>
           <Typography variant="caption">
-            {props.product.stock} on stock
+            {props.product.stock} 
+            {props.isCartProduct ? ' pcs' : ' on stock'}
           </Typography>
         </Box>
         <Box textAlign="center">
@@ -69,20 +69,41 @@ export default function Product(props) {
         </Box>
       </CardContent>
       <CardActions>
-        <Button 
-          variant="outlined" 
-          color="primary" 
-          disableElevation
-          className={classes.button}
-          disabled={props.product.stock == 0}
-          onClick={() => handleAddProduct(props.product)}
-        >
-          <FontAwesomeIcon 
-            icon={faCartPlus}
-            style={iconStyle.productCard}
-            />
-          Add to cart
-        </Button>
+        {
+          props.isCartProduct &&
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            disableElevation
+            className={classes.button}
+            onClick={() => handleAddProduct(props.product)}
+          >
+            <FontAwesomeIcon 
+              icon={faCartPlus}
+              style={iconStyle}
+              />
+            Remove
+          </Button>
+        }
+        {
+          !props.isCartProduct &&
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            disableElevation
+            className={classes.button}
+            disabled={props.product.stock == 0}
+            onClick={() => handleAddProduct(props.product)}
+          >
+            <FontAwesomeIcon 
+              icon={faCartPlus}
+              style={iconStyle}
+              />
+            Add to cart
+          </Button>
+        }
+        
+        
       </CardActions>
       <Box textAlign="right" pb={1} pr={1}>
         <Typography variant="caption">

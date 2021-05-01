@@ -2,7 +2,6 @@ import { useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box, Drawer, Typography } from '@material-ui/core';
 
-// Icons
 import Logo from '../../assets/icons/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
@@ -12,14 +11,12 @@ import {
   homePath, 
 } from '../../Routes';
 
-// Styles
 import { useStyles, iconStyle } from './styles';
 
-export const drawerWidth = 250; //export to use by MainLayout and styles
+export const drawerWidth = 250;
 
 export default function Nav() {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
 
   const handleChange = (_event, newValue) => {

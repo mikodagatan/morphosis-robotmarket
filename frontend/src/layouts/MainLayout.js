@@ -2,7 +2,7 @@ import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Nav, { drawerWidth } from '../components/Nav';
 import MainTheme from '../themes/MainTheme';
-import Checkout from '../components/Checkout/Checkout';
+import Cart from '../components/Cart/Cart';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,7 +30,7 @@ export default function Layout(props) {
             {props.children}
           </Box>
         </div>
-        <Checkout/>
+        <Cart/>
       </Box>
     </ThemeProvider>
   );

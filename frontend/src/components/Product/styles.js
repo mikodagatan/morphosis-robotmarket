@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { global } from '../../themes/MainTheme';
 
 export const useStyles = makeStyles({
   root: {
@@ -14,6 +15,11 @@ export const useStyles = makeStyles({
   },
   button: {
     width: '100%' 
+  },
+  cartProductButton: {
+    width: '100%',
+    color: `rgb(${global.colors.warning})`,
+    borderColor: `1px solid rgb(${global.colors.warning})` 
   }
 })
 

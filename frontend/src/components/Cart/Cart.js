@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { useMutation } from 'react-query';
 import {
   Box,
   Fab,
@@ -12,18 +13,13 @@ import Product from '../Product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-import { CartContext } from '../../contexts/CartContext';
+import { AppContext } from '../../contexts/AppContext';
 
-export default function Checkout() {
+export default function Cart() {
   const classes = useStyles();
-  const [isVisible, setIsVisible] = useState(true);
-  const [state, _dispatch] = useContext(CartContext);
-
+  const [isVisible, setIsVisible] = useState(false);
+  const [state, _dispatch] = useContext(AppContext);
   const maximumProducts = 5;
-
-  useEffect(() => {
-    
-  })
 
   return (
     <>
@@ -60,7 +56,7 @@ export default function Checkout() {
             flexWrap="wrap"
           >
             {
-              state.products.length == 0 &&
+              state.productsInCart.length == 0 &&
               <Box padding={6}>
                 <Typography variant="h4">
                   No robots in your shopping cart, yet. ;)
@@ -68,9 +64,13 @@ export default function Checkout() {
               </Box>
             }
             { 
-              state.products.length > 0 &&
-              state.products.map( (product, index) => 
-                <Product product={product} key={index} />
+              state.productsInCart.length > 0 &&
+              state.productsInCart.map( (product, index) => 
+                <Product 
+                  product={product} 
+                  isCartProduct={true}
+                  key={index} 
+                />
               )
             }
 
