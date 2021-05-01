@@ -6,7 +6,9 @@ export const AppContext = createContext();
 const initialState = {
   productsInList: [],
   productsInCart: [],
-  totalPrice: 0
+  totalPrice: 0,
+  error: '',
+  openNotification: false
 };
 
 export const AppContextProvider = ( { children } ) => {

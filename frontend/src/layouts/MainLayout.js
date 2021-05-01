@@ -2,7 +2,8 @@ import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import Nav, { drawerWidth } from '../components/Nav';
 import MainTheme from '../themes/MainTheme';
-import Cart from '../components/Cart/Cart';
+import Cart from '../components/Cart';
+import Notification from '../components/Notification'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,6 +24,7 @@ export default function Layout(props) {
 
   return (
     <ThemeProvider theme={MainTheme}>
+      <Notification />
       <Box>
         <Nav />
         <div className={classes.main}>

@@ -102,6 +102,17 @@ const CartReducer = (state, action) => {
         ),
         totalPrice: state.totalPrice - priceToDeduct
       }
+    case 'snackbar/error':
+      return {
+        ...state,
+        error: action.payload,
+        openNotification: true
+      }
+    case 'snackbar/close':
+      return {
+        ...state,
+        openNotification: false
+      }
     default:
       return state;
   };

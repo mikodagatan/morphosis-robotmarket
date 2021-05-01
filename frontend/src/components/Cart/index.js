@@ -21,8 +21,6 @@ export default function Cart() {
   const classes = useStyles();
   const [isVisible, setIsVisible] = useState(false);
   const [state, _dispatch] = useContext(AppContext);
-  const maximumProducts = 5;
-  console.log(state)
 
   return (
     <>

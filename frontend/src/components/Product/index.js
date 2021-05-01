@@ -21,9 +21,29 @@ import { AppContext } from '../../contexts/AppContext';
 
 export default function Product(props) {
   const classes = useStyles();
-  const [_state, dispatch] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
+  const maximumProductsInCart = 2;
+
+  const validateMaxProducts = (product) => {
+    const productIsInCart = state.productsInCart
+      .filter((item) => product.name == item.name).length > 0;
+
+    const maximumProductsInCartReached =  (
+      state.productsInCart.length == maximumProductsInCart);
+
+    if (maximumProductsInCartReached && !productIsInCart) {
+      dispatch({
+        type: 'snackbar/error',
+        payload: `You cannot have more than 
+          ${maximumProductsInCart} different robots.`
+      })
+      return false
+    }
+    return true
+  }
 
   const handleAddProduct = (product) => {
+    if (!validateMaxProducts(product)) return false
     dispatch({
       type: 'cart/addProduct',
       payload: product
