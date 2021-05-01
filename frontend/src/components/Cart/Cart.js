@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
 import {
   Box,
+  Button,
+  Divider,
   Fab,
   Drawer,
   Typography
@@ -8,6 +10,7 @@ import {
 
 import { useStyles  } from './styles';
 import Product from '../Product';
+import Currency from '../Currency';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +22,7 @@ export default function Cart() {
   const [isVisible, setIsVisible] = useState(false);
   const [state, _dispatch] = useContext(AppContext);
   const maximumProducts = 5;
+  console.log(state)
 
   return (
     <>
@@ -45,6 +49,9 @@ export default function Cart() {
           padding={4}
         >
           <Typography variant="h3">My Shopping Cart</Typography>
+          
+
+
           <Box
             id="cart-products-container"
             width={700}
@@ -73,8 +80,43 @@ export default function Cart() {
               )
             }
 
-            
           </Box>
+        </Box>
+
+        <Divider/>
+        <Box 
+          id="total-price"
+          padding={4}
+          textAlign="right"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+        > 
+          <Box px={2}>
+            <Typography variant="body1">
+              Total:
+            </Typography>
+          </Box>
+          <Box px={2} width={150}> 
+            <Typography variant="h3">
+              <Currency value={state.totalPrice}/>
+            </Typography>
+          </Box>
+          
+        </Box>
+        <Box
+          id="checkout"
+          display="flex"
+          justifyContent="flex-end"
+          px={5}
+          pb={4}
+        >
+            <Button 
+              variant="contained" 
+              color="primary"
+            >
+              Checkout
+            </Button>
         </Box>
       </Drawer>
     </>

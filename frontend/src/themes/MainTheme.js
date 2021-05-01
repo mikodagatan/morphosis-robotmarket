@@ -36,7 +36,7 @@ export default createMuiTheme({
     },
     caption: {
       color: "rgba(0,0,0,0.65)"
-    }
+    },
   },
 
   // Use rgba. Figma can change colors to rgba.

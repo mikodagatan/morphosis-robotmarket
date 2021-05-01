@@ -85,7 +85,7 @@ const CartReducer = (state, action) => {
         ...state,
         productsInList: formatListProduct(action.payload),
         productsInCart: formatCartProduct(action.payload),
-        totalPrice: state.total + action.payload.price
+        totalPrice: state.totalPrice + parseFloat(action.payload.price)
       };
     case 'cart/incrementProduct':
       return {
@@ -100,7 +100,7 @@ const CartReducer = (state, action) => {
         productsInCart: state.productsInCart.filter(
           product => product !== action.payload
         ),
-        totalPrice: state.total - priceToDeduct
+        totalPrice: state.totalPrice - priceToDeduct
       }
     default:
       return state;
