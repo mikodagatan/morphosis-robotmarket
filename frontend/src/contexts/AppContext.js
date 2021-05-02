@@ -6,6 +6,7 @@ export const AppContext = createContext();
 const initialState = {
   productsInList: [],
   productsInCart: [],
+  removedProducts: [],
   totalPrice: 0,
   error: '',
   openNotification: false

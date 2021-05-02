@@ -19,9 +19,10 @@ export default function Home() {
     { staleTime: Infinity });
 
   if (status == 'success' && state.productsInList.length == 0) {
+    const sortedData = data.data.sort((a,b) => (a.name > b.name) ? 1 : -1)
     dispatch({
       type: 'list/getProducts',
-      payload: data.data
+      payload: sortedData
     })
   }
 

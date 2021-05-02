@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box, Drawer, Typography } from '@material-ui/core';
 
 import Logo from '../../assets/icons/logo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
 
+import Filter from '../Filter';
 
-import { 
-  homePath, 
-} from '../../Routes';
+import { homePath } from '../../Routes';
 
-import { useStyles, iconStyle } from './styles';
+import { useStyles } from './styles';
 
 export const drawerWidth = 250;
 
@@ -23,14 +20,7 @@ export default function Nav() {
     setValue(newValue);
   };
 
-  const navItems = [
-    [
-      'Home',
-      homePath,
-      <FontAwesomeIcon icon={faHome} style={iconStyle}/>
-    ],
-
-  ];
+  const navItems = []
 
   return (
     <div className={classes.rootDiv}>
@@ -81,6 +71,7 @@ export default function Nav() {
             );
           })}
         </Tabs>
+        <Filter/>
       </Drawer>
     </div>
   );
