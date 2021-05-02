@@ -6,6 +6,7 @@ export default function Currency(props) {
     value={props.value}
     prefix="฿"
     displayType="text"
-    thousandSeparator={true} />
+    thousandSeparator={true}
+    decimalScale={2} />
   );
 }

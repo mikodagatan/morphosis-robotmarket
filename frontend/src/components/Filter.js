@@ -7,7 +7,7 @@ import {
   Typography
 } from '@material-ui/core';
 
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '../contexts/AppContext';
 
 
 export default function Filter() {
