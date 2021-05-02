@@ -11,17 +11,21 @@ import {
   Button,
   Typography
 } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faCartPlus,
+  faPlus,
+  faMinus
+} from '@fortawesome/free-solid-svg-icons';
+import { useStyles, iconStyle } from './styles';
+import { AppContext } from '../../contexts/AppContext';
 import Currency from '../Currency';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { useStyles, iconStyle } from './styles';
-
-import { AppContext } from '../../contexts/AppContext';
 
 export default function Product(props) {
   const classes = useStyles();
   const [state, dispatch] = useContext(AppContext);
+
   const maximumProductsInCart = 5;
 
   const validateMaxProducts = (product) => {
@@ -71,14 +75,14 @@ export default function Product(props) {
     return array
   }
 
-  const formatCartProduct = (product) => {
+  const formatCartProduct = (product, action) => {
     var productInCart = objectInArray(state.productsInCart, product);
     const productIsInCart = productInCart.length >= 1;
 
     if (productIsInCart) {
       productInCart = productInCart[0]
       // WHY: using productInCart.stock += 1 results to a different number.
-      const newProduct = createNewProduct(productInCart, 'increment');
+      const newProduct = createNewProduct(productInCart, action);
       
       return replaceObjectInArray(state.productsInCart, newProduct);
     } else {
@@ -87,11 +91,11 @@ export default function Product(props) {
     }
   }
 
-  const formatListProduct = (product) => {
+  const formatListProduct = (product, action) => {
     const productInList = objectInArray(state.productsInList, product)[0];
     
     // WHY: using productInList.stock -= 1 always results to 1.
-    const newProduct = createNewProduct(productInList, 'decrement');
+    const newProduct = createNewProduct(productInList, action);
 
     return replaceObjectInArray(state.productsInList, newProduct);
   }
@@ -113,8 +117,8 @@ export default function Product(props) {
 
   const handleAddProduct = (product) => {
     if (!validateMaxProducts(product)) return false
-    const productsInList = formatListProduct(product);
-    const productsInCart = formatCartProduct(product);
+    const productsInList = formatListProduct(product, 'decrement');
+    const productsInCart = formatCartProduct(product, 'increment');
 
     dispatch({
       type: 'cart/addProduct',
@@ -135,6 +139,34 @@ export default function Product(props) {
       ),
       totalPrice: state.totalPrice - priceToDeduct
     })
+  }
+
+  const handleIncrementProduct = (product) => {
+    const productInList = objectInArray(state.productsInList, product)[0]
+    handleAddProduct(productInList)
+  }
+
+  const handleDecrementProduct = (product) => {
+    const productInList = objectInArray(state.productsInList, product)[0]
+    const productsInList = formatListProduct(productInList, 'increment')
+    const productsInCart = formatCartProduct(productInList, 'decrement')
+    
+    dispatch({
+      type: 'cart/decrementProduct',
+      productsInList: productsInList,
+      productsInCart: productsInCart,
+      totalPrice: state.totalPrice - parseFloat(productInList.price)
+    })
+  }
+
+  const disableIncrement = () => {
+    const productInList = objectInArray(state.productsInList, props.product)[0]
+    console.log(productInList)
+    return productInList.stock == 0
+  }
+
+  const disableDecrement = () => {
+    return props.product.stock == 1
   }
   
   
@@ -173,15 +205,41 @@ export default function Product(props) {
           </Typography>
         </Box>
         <Box textAlign="center">
-          
+           
         </Box>
       </CardContent>
+      {
+        props.isCartProduct &&
+        <Box
+          pb={3}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          >
+          <Box pr={3}>
+            <Button
+              disabled={disableDecrement()}
+              onClick={() => handleDecrementProduct(props.product)}
+            >
+              <FontAwesomeIcon icon={faMinus}/>
+            </Button>
+          </Box>
+          
+          <Button
+            disabled={disableIncrement()}
+            onClick={() => handleIncrementProduct(props.product)}
+          >
+            <FontAwesomeIcon icon={faPlus}/>
+          </Button>
+        </Box>
+      }
       <CardActions>
         {
           props.isCartProduct &&
           <Button 
             variant="outlined" 
-            color="primary" 
+            color="secondary"
             disableElevation
             className={classes.button}
             onClick={() => handleRemoveProduct(props.product)}

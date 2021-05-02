@@ -18,10 +18,12 @@ const CartReducer = (state, action) => {
         productsInCart: action.productsInCart,
         totalPrice: action.totalPrice
       };
-    case 'cart/incrementProduct':
+    case 'cart/decrementProduct':
       return {
         ...state,
-        totalPrice: 0
+        productsInList: action.productsInList,
+        productsInCart: action.productsInCart,
+        totalPrice: action.totalPrice
       }
     case 'cart/removeProduct':
       return {
